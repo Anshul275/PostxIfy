@@ -35,5 +35,5 @@ mongoose.connect(
 );
 
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`\nServer running on port ${PORT}`));

@@ -9,10 +9,11 @@ module.exports = async function(req, res, next) {
     try {
         const verification = jwt.verify(token, process.env.TOKEN_SECRET);
         const user = User.findOne({ userId: verification.userId });
-        if(user)
+        if(verification.userId === req.body.userId && user) {
             next();
+        }
         else {
-            res.status(400).json({ message: "Access Denied!" });
+            res.status(401).json({ message: "Access Denied!!" });
         }
     } catch(err) {
         res.status(400).json({ message: "Invalid Token!" });

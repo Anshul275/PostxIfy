@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-// Database - Schema to store user's post info
 const PostSchema = mongoose.Schema({
         userId: {
             type: String,
+            max: 10,
             required: true
         },
         url: {
@@ -12,6 +12,7 @@ const PostSchema = mongoose.Schema({
         },
         caption: {
             type: String,
+            max: 75,
             required: true
         },
         likedBy: {

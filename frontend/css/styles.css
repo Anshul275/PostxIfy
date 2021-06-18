@@ -40,12 +40,23 @@ textarea {
     color: #f14a47;
 }
 
+#back_btn {
+    display: none;
+    position: fixed;
+    height: 45px;  
+    z-index: 1;
+    margin-top: -5px;
+    margin-left: 20px;
+    border: solid;
+    border-radius: 25px;
+}
+
 #pre-home {
     display: flex;
     margin-top: 100px;
     height: 300px;
     border-radius: 25px;
-    background-image: url(../Images/background.jpg);
+    background-image: url(../images/background.jpg);
     background-size: cover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-left: 25%;
@@ -94,7 +105,11 @@ textarea {
 }
 
 #login-section {
-    margin-top: 90px;
+    margin-top: 45px;
+}
+
+#forgot-password-section {
+    margin-top: 20px;
 }
 
 .field_set {
@@ -124,6 +139,66 @@ textarea {
     border-radius: 8px;
 }
 
+input[type="password"] {
+    font-size: 30px;
+}
+
+#forgot_btn {
+    margin-top: 10px;
+    width: 220px;
+    background-color: #e74c4c;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    line-height: 2;
+}
+
+#forgot_btn:hover {
+    cursor: pointer;
+    background-color: #cf4949;
+}
+
+#get_otp_pos {
+    text-align: center;
+}
+
+#get_otp {
+    margin-top: 10px;
+    width: 120px;
+    background-color: #4f62ca;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    line-height: 2;
+}
+
+#get_otp:hover {
+    cursor: pointer;
+    background-color: #434fa1;
+}
+
+#reset_btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 150px;
+    background-color: #37aa5d;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    line-height: 2;
+}
+
+#reset_btn:hover {
+    cursor: pointer;
+    background-color: #2d9167;
+}
+
 .submit {
     margin-top: 10px;
     width: 160px;
@@ -142,7 +217,26 @@ textarea {
     background-color: rgb(63, 120, 134);
 }
 
+#login-section {
+    display: none;
+}
+
 #login {
+    display: flex;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: -15px;
+    margin-left: 25%;
+    margin-right: 25%;
+    justify-content: center;
+}
+
+#forgot-password-section {
+    display: none;
+}
+
+#forgot_password {
     display: flex;
     border-radius: 25px;
     background-color: whitesmoke;
@@ -169,10 +263,19 @@ textarea {
     text-align: center;
 }
 
+#forgot_btn_pos {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#reset_btn_pos {
+    text-align: center;
+}
+
 #login_user {
     margin-top: 20px;
     margin-bottom: 30px;
-    width: 100px;
+    width: 120px;
     background-color: #4f62ca;
     border: none;
     border-radius: 5px;
@@ -187,11 +290,16 @@ textarea {
     background-color: rgb(63, 120, 134);
 }
 
+#register-section {
+    display: none;
+}
+
 #register {
     display: flex;
     border-radius: 25px;
     background-color: whitesmoke;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: -15px;
     margin-left: 25%;
     margin-right: 25%;
     justify-content: center;
@@ -209,9 +317,14 @@ textarea {
     margin-bottom: 25px;
 }
 
+#user-data {
+    display: none;
+    margin-top: -5px;
+}
+
 #user_section {
     display: none;
-    margin-top: 120px;
+    margin-top: 180px;
 }
 
 #user_details {
@@ -219,15 +332,16 @@ textarea {
     border-radius: 25px;
     background-color: whitesmoke;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-left: 32.5%;
-    margin-right: 32.5%;
+    margin-left: 30%;
+    margin-right: 30%;
     justify-content: center;
 }
 
 #user_avatar {
     float: left; 
-    margin-top: 45px; 
-    width: 125px;
+    margin-top: 40px;
+    width: 140px;
+    height: 200px;
 }
 
 #userPost_btn {
@@ -281,6 +395,76 @@ textarea {
     background-color: #af3333;
 }
 
+#update-user-details-section {
+    display: none;
+}
+
+#update-user-form legend {
+    color: rgb(116, 76, 211);
+}
+
+#update_details_btn {
+    clear: both;
+    display: none;
+    width: 150px;
+    background-color: #3369af;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-top: 10px; 
+    margin-right: 5px; 
+    float: right;
+    color: #fff;
+    line-height: 2;
+}
+
+#update_details_btn:hover {
+    cursor: pointer;
+    background-color: #2b558d;
+}
+
+#update-user {
+    display: flex;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: -15px;
+    margin-left: 25%;
+    margin-right: 25%;
+    justify-content: center;
+}
+
+#update_user_btn_pos {
+    text-align: center;
+}
+
+#container_updateId {
+    margin-top: 20px;
+}
+
+#bio_update {
+    height: 50px;
+}
+
+#confirm_details {
+    margin-bottom: 25px;
+    margin-top: 10px;
+    width: 120px;
+    background-color: #4f62ca;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    line-height: 2;
+}
+
+#confirm_details:hover {
+    cursor: pointer;
+    background-color: #2f705a;
+}
+
 #delete_user_btn {
     clear: both;
     display: none;
@@ -304,6 +488,10 @@ textarea {
 
 #postMeme_btn {
     text-align: center;
+}
+
+#posts_section {
+    display: none;
 }
 
 #most_adored_btn {
@@ -383,6 +571,10 @@ textarea {
     margin-left: 25%;
     margin-right: 25%;
     justify-content: center;
+}
+
+#edit-post-form legend {
+    color: rgb(116, 76, 211);
 }
 
 #post_id {
@@ -531,11 +723,17 @@ textarea {
 }
 
 .userId_section {
+    margin-top: 30px;
     color: rgb(190, 77, 77);
 }
 
 .userName_section {
     margin-top: 5px;
+}
+
+.userEmail_section {
+    margin-top: 15px;
+    color: rgb(196, 117, 0);
 }
 
 .userBio_section {
@@ -579,7 +777,8 @@ textarea {
 
 
 
-/* Special Treatment */
+
+
 .pop_img_modal {
     display: none;
     position: fixed;
@@ -704,7 +903,8 @@ textarea {
     to {opacity: 1}
 }
 
-/* Special Treatment Ends */
+
+
 
 
 @media screen and (max-width: 60em) {
@@ -722,7 +922,15 @@ textarea {
         margin-left: 15%;
         margin-right: 15%;
     }
+    #forgot_password {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
     #register {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    #update-user {
         margin-left: 15%;
         margin-right: 15%;
     }
@@ -735,8 +943,8 @@ textarea {
         margin-right: 15%;
     }
     #user_details {
-        margin-left: 25%;
-        margin-right: 25%;
+        margin-left: 22.5%;
+        margin-right: 22.5%;
     }
 }
 
@@ -761,7 +969,15 @@ textarea {
         margin-left: 10%;
         margin-right: 10%;
     }
+    #forgot_password {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
     #register {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    #update-user {
         margin-left: 10%;
         margin-right: 10%;
     }
@@ -776,6 +992,10 @@ textarea {
     #user_details {
         margin-left: 5%;
         margin-right: 5%;
+    }
+    #user_avatar {
+        width: 120px;
+        height: 200px;
     }
     #popup_image {
         width: 80%;
