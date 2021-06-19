@@ -25,8 +25,7 @@ app.use("/api/v1.0/posts", postsRoute);
 
 // CONNECT TO DB
 mongoose.connect(
-    process.env.DB_CONNECT,
-    {
+    process.env.DB_CONNECT, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true
