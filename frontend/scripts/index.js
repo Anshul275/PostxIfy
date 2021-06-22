@@ -2,8 +2,8 @@
 let TOKEN = "";
 let session_id = "";
 let savedData = localStorage.getItem("session");
-if (savedData) {
-    data = JSON.parse(savedData)
+if(savedData) {
+    data = JSON.parse(savedData);
     TOKEN = data.token;
     session_id = data.sessionId;
 }
@@ -75,22 +75,24 @@ async function handleLogin(event) {
     try {
         wait();
         const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(login_data)
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(login_data)
+            });
         const login_confirm = await res.json();
-        if (res.status === 500) {
+        if(res.status === 500) {
             pop_msg.innerHTML = "INTERNAL SERVER ERROR";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-        } else if (res.status === 400) {
+        }
+        else if(res.status === 400) {
             pop_msg.innerHTML = login_confirm.message;
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-        } else {
+        }
+        else {
             document.title = "Home | TrashHUB";
             session_id = login_confirm.userId;
             TOKEN = login_confirm.TOKEN;
@@ -108,7 +110,7 @@ async function handleLogin(event) {
             msg_cont.style.background = "#258b69";
             show_msg.style.display = "block";
         }
-    } catch (err) {
+    } catch(err) {
         pop_msg.innerHTML = "Some error happened...";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
@@ -123,33 +125,36 @@ async function handleForgotPass(event) {
 async function getOtp() {
     const user_id = document.getElementById("userID_forgot").value;
 
-    if (user_id === "") {
+    if(user_id === "") {
         pop_msg.innerHTML = "Please provide the user_id.....";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
-    } else {
+    }
+    else {
         const raw_data = new FormData();
         raw_data.append("userId", user_id);
         let forgot_pass_data = Object.fromEntries(raw_data.entries());
         try {
             wait();
             const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/forgotPassword', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(forgot_pass_data)
-            });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(forgot_pass_data)
+                });
             const otp_sent = await res.json();
-            if (res.status === 500) {
+            if(res.status === 500) {
                 pop_msg.innerHTML = "INTERNAL SERVER ERROR";
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-            } else if (res.status === 400) {
+            }
+            else if(res.status === 400) {
                 pop_msg.innerHTML = otp_sent.message;
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-            } else {
+            }
+            else {
                 pop_msg.innerHTML = otp_sent.message;
                 msg_cont.style.background = "#258b69";
                 show_msg.style.display = "block";
@@ -175,28 +180,31 @@ async function resetPass() {
     try {
         wait();
         const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/resetPassword', {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(reset_pass_data)
-        });
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reset_pass_data)
+            });
         const reset_confirm = await res.json();
-        if (res.status === 500) {
+        if(res.status === 500) {
             pop_msg.innerHTML = "INTERNAL SERVER ERROR";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-        } else if (res.status === 400) {
+        }
+        else if(res.status === 400) {
             pop_msg.innerHTML = reset_confirm.message;
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-        } else {
+        }
+        else {
             pop_msg.innerHTML = reset_confirm.message;
             msg_cont.style.background = "#258b69";
             show_msg.style.display = "block";
-            setTimeout(function () {
+            setTimeout(function(){
                 window.location.reload(1);
-            }, 2000);
+                }, 2000
+            );
         }
     } catch (err) {
         pop_msg.innerHTML = "Some error happened...";
@@ -211,46 +219,51 @@ async function handleRegister(event) {
     const raw_data = new FormData(event.target);
     let register_data = Object.fromEntries(raw_data.entries());
     let new_lines = 0;
-    if (register_data.bio === "") {
+    if(register_data.bio === ""){
         delete register_data.bio;
-    } else {
-        register_data.bio = register_data.bio.replace(/\n/g, '<br />');
+    }
+    else {
+        register_data.bio = register_data.bio.replace(/\n/g,'<br />');
         new_lines = (register_data.bio.match(/\n/g) || []).length;
     }
 
-    if (new_lines > 3) {
+    if(new_lines > 3) {
         pop_msg.innerHTML = "BIO not more than 4 lines : RESTRICTED";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
-    } else {
+    }
+    else {
         try {
             wait();
             const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/register/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth-token': TOKEN
-                },
-                body: JSON.stringify(register_data)
-            });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': TOKEN
+                    },
+                    body: JSON.stringify(register_data)
+                });
             const register_confirm = await res.json();
-            if (res.status === 500) {
+            if(res.status === 500) {
                 pop_msg.innerHTML = "INTERNAL SERVER ERROR";
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-            } else if (res.status === 201) {
+            }
+            else if(res.status === 201) {
                 pop_msg.innerHTML = register_confirm.message;
                 msg_cont.style.background = "#258b69";
                 show_msg.style.display = "block";
-                setTimeout(function () {
+                setTimeout(function(){
                     window.location.reload(1);
-                }, 2000);
-            } else {
+                    }, 2000
+                );
+            }
+            else {
                 pop_msg.innerHTML = register_confirm.message;
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
             }
-        } catch (err) {
+        } catch(err) {
             pop_msg.innerHTML = "Some error happened...";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
@@ -277,40 +290,40 @@ function loadHomePage() {
     document.querySelector("#editPost").style.display = "none";
 }
 
-function postDuration(date) {
+function postDuration(date){
     let seconds = Math.floor((Date.now() - date) / 1000);
 
     let interval = seconds / 31536000;
     if (interval > 1) {
-        if (Math.floor(interval) === 1)
+        if(Math.floor(interval) === 1)
             return Math.floor(interval) + " yr ago";
         return Math.floor(interval) + " yrs ago";
     }
 
     interval = seconds / 2592000;
     if (interval > 1) {
-        if (Math.floor(interval) === 1)
+        if(Math.floor(interval) === 1)
             return Math.floor(interval) + " month ago";
         return Math.floor(interval) + " months ago";
     }
 
     interval = seconds / 86400;
     if (interval > 1) {
-        if (Math.floor(interval) === 1)
+        if(Math.floor(interval) === 1)
             return Math.floor(interval) + " day ago";
         return Math.floor(interval) + " days ago";
     }
 
     interval = seconds / 3600;
     if (interval > 1) {
-        if (Math.floor(interval) === 1)
+        if(Math.floor(interval) === 1)
             return Math.floor(interval) + " hr ago";
         return Math.floor(interval) + " hrs ago";
     }
 
     interval = seconds / 60;
     if (interval > 1) {
-        if (Math.floor(interval) === 1)
+        if(Math.floor(interval) === 1)
             return Math.floor(interval) + " min ago";
         return Math.floor(interval) + " mins ago";
     }
@@ -318,10 +331,10 @@ function postDuration(date) {
     return Math.floor(seconds) + " secs ago";
 }
 
-function addPostsToHTML(post, addLoc) {
+function addPostsToHTML(post, addLoc){
     let suitable_image = "./images/edits/unliked.png";
     let liked_data = "false";
-    if (post.likedBy.includes(session_id)) {
+    if(post.likedBy.includes(session_id)) {
         suitable_image = "./images/edits/liked.png";
         liked_data = "true";
     }
@@ -332,8 +345,8 @@ function addPostsToHTML(post, addLoc) {
                 <article class = "card">
                     <br>
                 `;
-    if (post.userId === session_id) {
-        postStruct += ` 
+    if(post.userId === session_id) {
+        postStruct +=    ` 
                         <div>
                             <button type="text" class="editBtn" value="${post._id}">
                                 <img class="editImg" src="./images/edits/edit.png">
@@ -345,7 +358,7 @@ function addPostsToHTML(post, addLoc) {
                 <p class="userId_card"><a class="userId_links"><b>${post.userId}</b></a></p>
                 <p class="postDur">${post_dur}</p>
             `;
-    if (post.userId === session_id) {
+    if(post.userId === session_id) {
         postStruct += `
                     <div class="controls">
                         <button type="text" class="deleteBtn" value="${post._id}">
@@ -384,22 +397,24 @@ async function loadLatestPosts(addLoc) {
             }
         });
         const data = await res.json();
-        if (res.status === 500) {
+        if(res.status === 500) {
             pop_msg.innerHTML = "INTERNAL SERVER ERROR";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-        } else if (res.status === 200) {
+        }
+        else if(res.status === 200) {
             show_msg.style.display = "none";
-            data.forEach(function (post) {
+            data.forEach( function(post) {
                 addPostsToHTML(post, addLoc);
             });
-            initiate_edit_delete_like_popupImg_userLinks();
-        } else {
+            initiate_edit_delete_like_popupImg_userLinks();   
+        }
+        else {
             pop_msg.innerHTML = data.message;
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
         }
-    } catch (err) {
+    } catch(err) {
         pop_msg.innerHTML = "Some error happened...";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
@@ -417,22 +432,24 @@ async function loadAdoredPosts(addLoc) {
             }
         });
         const data = await res.json();
-        if (res.status === 500) {
+        if(res.status === 500) {
             pop_msg.innerHTML = "INTERNAL SERVER ERROR";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-        } else if (res.status === 200) {
+        }
+        else if(res.status === 200) {
             show_msg.style.display = "none";
-            data.forEach(function (post) {
+            data.forEach( function(post) {
                 addPostsToHTML(post, addLoc);
             });
-            initiate_edit_delete_like_popupImg_userLinks();
-        } else {
+            initiate_edit_delete_like_popupImg_userLinks();   
+        }
+        else {
             pop_msg.innerHTML = data.message;
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
         }
-    } catch (err) {
+    } catch(err) {
         pop_msg.innerHTML = "Some error happened...";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
@@ -445,19 +462,19 @@ function initiate_edit_delete_like_popupImg_userLinks() {
     const likeBtns = document.querySelectorAll(".likeBtn");
     const images = document.querySelectorAll(".pop_img");
     const userLinks = document.querySelectorAll(".userId_links");
-    editBtns.forEach(function (post) {
+    editBtns.forEach( function(post) {
         post.addEventListener("click", openEditPostScreen);
     });
-    deleteBtns.forEach(function (post) {
+    deleteBtns.forEach( function(post) {
         post.addEventListener("click", deletePost);
     });
-    likeBtns.forEach(function (post) {
+    likeBtns.forEach( function(post) {
         post.addEventListener("click", like_unlike_Post);
     });
-    images.forEach(function (post) {
+    images.forEach( function (post) {
         post.addEventListener("click", displayPopupImg);
     });
-    userLinks.forEach(function (post) {
+    userLinks.forEach( function (post) {
         post.addEventListener("click", userSection);
     });
 }
@@ -478,21 +495,23 @@ async function like_post(post_id, like_image, likes) {
             body: JSON.stringify(like_data)
         });
         const post_update = await res.json();
-        if (res.status === 500) {
+        if(res.status === 500) {
             pop_msg.innerHTML = "INTERNAL SERVER ERROR";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-        } else if (res.status === 200) {
+        }
+        else if(res.status === 200) {
             show_msg.style.display = "none";
             like_image.setAttribute("liked", "true");
             like_image.src = "./images/edits/liked.png";
             likes.innerHTML++;
-        } else {
+        }
+        else {
             pop_msg.innerHTML = post_update.message;
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
         }
-    } catch (err) {
+    } catch(err) {
         pop_msg.innerHTML = "Some error happened...";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
@@ -515,21 +534,23 @@ async function unlike_post(post_id, like_image, likes) {
             body: JSON.stringify(like_data)
         });
         const post_update = await res.json();
-        if (res.status === 500) {
+        if(res.status === 500) {
             pop_msg.innerHTML = "INTERNAL SERVER ERROR";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-        } else if (res.status === 200) {
+        }
+        else if(res.status === 200) {
             show_msg.style.display = "none";
             like_image.setAttribute("liked", "false");
             like_image.src = "./images/edits/unliked.png";
             likes.innerHTML--;
-        } else {
+        }
+        else {
             pop_msg.innerHTML = post_update.message;
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
         }
-    } catch (err) {
+    } catch(err) {
         pop_msg.innerHTML = "Some error happened...";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
@@ -540,15 +561,16 @@ function like_unlike_Post() {
     let likes = this.querySelector(".likes_data");
     let like_image = this.querySelector(".likeImg");
     const if_liked = like_image.getAttribute("liked");
-    if (if_liked === "true") {
+    if(if_liked === "true") {
         unlike_post(this.value, like_image, likes);
-    } else {
+    }
+    else {
         like_post(this.value, like_image, likes);
     }
 }
 
 async function deletePost() {
-    if (confirm("Are you sure you want to delete this post????")) {
+    if(confirm("Are you sure you want to delete this post????")) {
         try {
             wait();
             const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/' + this.value;
@@ -558,44 +580,48 @@ async function deletePost() {
                     'Content-Type': 'application/json',
                     'auth-token': TOKEN
                 },
-                body: JSON.stringify({
-                    userId: session_id
-                })
+                body: JSON.stringify({ userId: session_id})
             });
             const delete_confirm = await res.json();
-            if (res.status === 500) {
+            if(res.status === 500) {
                 pop_msg.innerHTML = "INTERNAL SERVER ERROR";
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-            } else if (res.status == 200) {
-                if (delete_confirm.n == 1) {
+            }
+            else if(res.status == 200) {
+                if(delete_confirm.n == 1) {
                     open_logged_user_details();
                     pop_msg.innerHTML = "POST Deleted...";
                     msg_cont.style.background = "#258b69";
                     show_msg.style.display = "block";
-                } else {
+                }
+                else {
                     pop_msg.innerHTML = "POST doesn't exists...";
                     msg_cont.style.background = "#b13636";
                     show_msg.style.display = "block";
-                    setTimeout(function () {
+                    setTimeout(function(){
                         window.location.reload(1);
-                    }, 2000);
+                        }, 2000
+                    );
                 }
-            } else {
+            }
+            else {
                 pop_msg.innerHTML = delete_confirm.message;
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-                setTimeout(function () {
+                setTimeout(function(){
                     window.location.reload(1);
-                }, 2000);
+                    }, 2000
+                );
             }
-        } catch (err) {
+        } catch(err) {
             pop_msg.innerHTML = "Some error happened...";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-            setTimeout(function () {
+            setTimeout(function(){
                 window.location.reload(1);
-            }, 2000);
+                }, 2000
+            );
         }
     }
 }
@@ -633,15 +659,17 @@ async function loadUserDetails(user_id) {
             }
         });
         const data = await res.json();
-        if (res.status === 500) {
+        if(res.status === 500) {
             pop_msg.innerHTML = "INTERNAL SERVER ERROR";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-            setTimeout(function () {
+            setTimeout(function(){
                 window.location.reload(1);
-            }, 2000);
-        } else if (res.status === 200) {
-            if (!data.bio) data.bio = "";
+                }, 2000
+            );
+        }
+        else if(res.status === 200) {
+            if(!data.bio)   data.bio = "";
             let userDetails = `
                         <br />
                         <div class="userId_section"><b>${data.userId}</b></div>
@@ -651,21 +679,24 @@ async function loadUserDetails(user_id) {
                     `;
             const position = "beforeend";
             addLoc.insertAdjacentHTML(position, userDetails);
-        } else {
+        }
+        else {
             pop_msg.innerHTML = data.message;
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-            setTimeout(function () {
+            setTimeout(function(){
                 window.location.reload(1);
-            }, 2000);
+                }, 2000
+            );
         }
-    } catch (err) {
+    } catch(err) {
         pop_msg.innerHTML = "Some error happened...";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
-        setTimeout(function () {
+        setTimeout(function(){
             window.location.reload(1);
-        }, 2000);
+            }, 2000
+        );
     }
 }
 
@@ -681,34 +712,39 @@ async function loadUserPosts(user_id) {
             }
         });
         const data = await res.json();
-        if (res.status === 500) {
+        if(res.status === 500) {
             pop_msg.innerHTML = "INTERNAL SERVER ERROR";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-            setTimeout(function () {
+            setTimeout(function(){
                 window.location.reload(1);
-            }, 2000);
-        } else if (res.status === 200) {
+                }, 2000
+            );
+        }
+        else if(res.status === 200) {
             show_msg.style.display = "none";
-            data.forEach(function (post) {
+            data.forEach( function(post) {
                 addPostsToHTML(post, userPosts);
             });
             initiate_edit_delete_like_popupImg_userLinks();
-        } else {
+        }
+        else {
             pop_msg.innerHTML = data.message;
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
-            setTimeout(function () {
+            setTimeout(function(){
                 window.location.reload(1);
-            }, 2000);
+                }, 2000
+            );
         }
-    } catch (err) {
+    } catch(err) {
         pop_msg.innerHTML = "Some error happened...";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
-        setTimeout(function () {
+        setTimeout(function(){
             window.location.reload(1);
-        }, 2000);
+            }, 2000
+        );
     }
 }
 
@@ -728,50 +764,55 @@ async function handleDetailsUpdate(event) {
     let update_data = Object.fromEntries(raw_data.entries());
 
     let new_lines = 0;
-    if (update_data.name === "") {
+    if(update_data.name === "") {
         delete update_data.name;
     }
-    if (update_data.email === "") {
+    if(update_data.email === "") {
         delete update_data.email;
     }
-    if (update_data.password === "") {
+    if(update_data.password === "") {
         delete update_data.password;
     }
-    if (update_data.bio === "") {
+    if(update_data.bio === "") {
         delete update_data.bio;
-    } else {
-        update_data.bio = update_data.bio.replace(/\n/g, '<br />');
+    }
+    else {
+        update_data.bio = update_data.bio.replace(/\n/g,'<br />');
         new_lines = (update_data.bio.match(/\n/g) || []).length;
     }
-
-    if (new_lines > 3) {
+    
+    if(new_lines > 3) {
         pop_msg.innerHTML = "BIO not more than 4 lines : RESTRICTED";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
-    } else {
+    }
+    else {
         try {
             wait();
             const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/users/' + session_id, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth-token': TOKEN
-                },
-                body: JSON.stringify(update_data)
-            });
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': TOKEN
+                    },
+                    body: JSON.stringify(update_data)
+                });
             const update_confirm = await res.json();
-            if (res.status === 500) {
+            if(res.status === 500) {
                 pop_msg.innerHTML = "INTERNAL SERVER ERROR";
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-            } else if (res.status === 200) {
+            }
+            else if(res.status === 200) {
                 pop_msg.innerHTML = "Your details are successfully updated....";
                 msg_cont.style.background = "#258b69";
                 show_msg.style.display = "block";
-                setTimeout(function () {
+                setTimeout(function(){
                     open_logged_user_details()
-                }, 2000);
-            } else {
+                    }, 2000
+                );
+            }
+            else {
                 pop_msg.innerHTML = update_confirm.message;
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
@@ -786,52 +827,57 @@ async function handleDetailsUpdate(event) {
 }
 
 async function deleteUser() {
-    if (confirm("Are you sure you want to delete your profile????")) {
+    if(confirm("Are you sure you want to delete your profile????")) {
         try {
             wait();
             let url = "https://trash-hub.herokuapp.com/api/v1.0/users/" + session_id;
             const res = await fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth-token': TOKEN
-                },
-            });
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': TOKEN
+                    },
+                });
             const deleteUserData = await res.json();
-            if (res.status === 500) {
+            if(res.status === 500) {
                 pop_msg.innerHTML = "INTERNAL SERVER ERROR";
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-            } else if (res.status === 200) {
+            }
+            else if(res.status === 200) {
                 pop_msg.innerHTML = deleteUserData.message;
                 msg_cont.style.background = "#258b69";
                 show_msg.style.display = "block";
                 localStorage.setItem("session", "");
-                setTimeout(function () {
+                setTimeout(function(){
                     window.location.reload(1);
-                }, 2000);
-            } else {
+                    }, 2000
+                );
+            }
+            else {
                 pop_msg.innerHTML = deleteUserData.message;
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
             }
-        } catch (err) {
+        }
+        catch(err) {
             pop_msg.innerHTML = "Some error happened...";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
         }
-        setTimeout(function () {
+        setTimeout(function(){
             window.location.reload(1);
-        }, 2000);
+            }, 2000
+        );
     }
 }
 
 function userSection() {
     window.scrollTo(0, 0);
-    document.getElementById("posts_section").style.display = "none";
-    document.getElementById("user_section").style.display = "block";
+    document.getElementById("posts_section").style.display="none";
+    document.getElementById("user_section").style.display="block";
     back_btn.style.display = "block";
-    if (this.text === session_id) {
+    if(this.text === session_id) {
         document.getElementById("userPost_btn").style.display = "block";
         document.getElementById("delete_user_btn").style.display = "block";
         document.getElementById("update_details_btn").style.display = "block";
@@ -863,7 +909,7 @@ async function addImgUrl(loc_to_load, fileList) {
     let formData = new FormData();
     formData.append("image", fileList[0]);
     try {
-        const res = await fetch("https://api.imgur.com/3/image", {
+        const res = await fetch("https://api.imgur.com/3/image",{
             method: "POST",
             headers: {
                 "Authorization": "Client-ID 8d71c644e385869"
@@ -898,15 +944,16 @@ async function handlePost(event) {
     let post_data = Object.fromEntries(raw_data.entries());
     delete post_data.image;
     const new_lines = (post_data.caption.match(/\n/g) || []).length;
-    if (new_lines > 3) {
+    if(new_lines > 3) {
         pop_msg.innerHTML = "Caption not more than 4 lines : RESTRICTED";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
-    } else {
-        post_data.caption = document.getElementById("postMeme_caption").value.replace(/\n/g, '<br />');
+    }
+    else {
+        post_data.caption = document.getElementById("postMeme_caption").value.replace(/\n/g,'<br />');
 
         let check = post_data.url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-        if (check == null) {
+        if(check == null) {
             post_data.url = "https://hernitriko.cz/wp-content/uploads/2019/04/This-meme-is-not-available-in-your-country-design.jpg";
         }
 
@@ -921,23 +968,26 @@ async function handlePost(event) {
                 body: JSON.stringify(post_data)
             });
             const post_confirmation = await res.json();
-            if (res.status === 500) {
+            if(res.status === 500) {
                 pop_msg.innerHTML = "INTERNAL SERVER ERROR";
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-            } else if (res.status === 201) {
+            }
+            else if(res.status === 201) {
                 pop_msg.innerHTML = "POST UPLOADED!";
                 msg_cont.style.background = "#258b69";
                 show_msg.style.display = "block";
-                setTimeout(function () {
+                setTimeout(function(){
                     open_logged_user_details();
-                }, 2000);
-            } else {
+                    }, 2000
+                );
+            }
+            else {
                 pop_msg.innerHTML = post_confirmation.message;
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
             }
-        } catch (err) {
+        } catch(err) {
             pop_msg.innerHTML = "Some error happened...";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
@@ -969,26 +1019,29 @@ async function handleEditPost(event) {
     delete edit_post_data.image;
 
     let new_lines = 0;
-    if (edit_post_data.url === "") {
+    if(edit_post_data.url === "") {
         delete edit_post_data.url;
-    } else {
+    }
+    else {
         let check = edit_post_data.url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-        if (check == null) {
+        if(check == null) {
             edit_post_data.url = "https://hernitriko.cz/wp-content/uploads/2019/04/This-meme-is-not-available-in-your-country-design.jpg";
         }
     }
-    if (edit_post_data.caption === "") {
+    if(edit_post_data.caption === "") {
         delete edit_post_data.caption;
-    } else {
-        edit_post_data.caption = edit_post_data.caption.replace(/\n/g, '<br />');
+    }
+    else {
+        edit_post_data.caption = edit_post_data.caption.replace(/\n/g,'<br />');
         new_lines = (edit_post_data.caption.match(/\n/g) || []).length;
     }
-
-    if (new_lines > 3) {
+    
+    if(new_lines > 3) {
         pop_msg.innerHTML = "Caption not more than 4 lines : RESTRICTED";
         msg_cont.style.background = "#b13636";
         show_msg.style.display = "block";
-    } else {
+    }
+    else {
         try {
             wait();
             const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/' + post_id;
@@ -1002,24 +1055,27 @@ async function handleEditPost(event) {
             });
             const post_update = await res.json();
 
-            if (res.status === 500) {
+            if(res.status === 500) {
                 pop_msg.innerHTML = "INTERNAL SERVER ERROR";
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
-            } else if (res.status === 200) {
+            }
+            else if(res.status === 200) {
                 pop_msg.innerHTML = "POST UPDATED!";
                 msg_cont.style.background = "#258b69";
                 show_msg.style.display = "block";
-                setTimeout(function () {
+                setTimeout(function(){
                     open_logged_user_details();
-                }, 2000);
-
-            } else {
+                    }, 2000
+                );
+                
+            }
+            else {
                 pop_msg.innerHTML = post_update.message;
                 msg_cont.style.background = "#b13636";
                 show_msg.style.display = "block";
             }
-        } catch (err) {
+        } catch(err) {
             pop_msg.innerHTML = "Some error happened...";
             msg_cont.style.background = "#b13636";
             show_msg.style.display = "block";
@@ -1029,7 +1085,7 @@ async function handleEditPost(event) {
 }
 
 function openEditPostScreen() {
-    document.querySelector("#posts_section").style.display = "none";
+    document.querySelector("#posts_section").style.display="none";
     document.querySelector("#user_section").style.display = "none";
     document.querySelector("#delete_user_btn").style.display = "none";
     document.querySelector("#update_details_btn").style.display = "none";
@@ -1095,19 +1151,19 @@ const pop_msg = document.getElementById("pop_msg");
 const img_close = document.getElementById("pop_img_close");
 const msg_close = document.getElementById("pop_msg_close");
 
-img_close.onclick = function () {
+img_close.onclick = function() {
     show_pop_img.style.display = "none";
 };
 
-msg_close.onclick = function () {
+msg_close.onclick = function() {
     show_msg.style.display = "none";
 };
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == show_pop_img) {
         show_pop_img.style.display = "none";
     }
-    if (event.target == show_msg) {
+    if(event.target == show_msg) {
         show_msg.style.display = "none";
     }
 }
@@ -1121,9 +1177,8 @@ function displayPopupImg() {
 
 
 
-
-// Checks for any user_sessions
-if (TOKEN != "") {
+// Check for any user_sessions
+if(TOKEN != "") {
     document.querySelector("#login-register").style.display = "none";
     document.querySelector("#user-data").style.display = "block";
     document.querySelector("#posts_section").style.display = "block";
