@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | TrashHUB</title>
+    <link rel="icon" href="./images/logo.jpg">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <h1 id="logo_head">
+        <span id="logo">
+            <i id="logo_left">Trash<b id="logo_right">HUB</b></i>
+        </span>
+    </h1>
+    <div id="login-register"  class="animate">
+        <div id="pre-home">
+            <button id="button-login">Login!</button>
+            <button id="button-register">Register!</button>
+        </div>
+    </div>
+    <div id="login-section" class="animate">
+        <h1 class="heading">LOGIN!!!</h1>
+        <div id="login">
+            <form id="login-form">
+                <fieldset class="field_set" id="container_userId_login">
+                    <legend class="label">User ID <b class="mandatoryField">*</b></legend>
+                    <input class="entry" id="userID_verify" type="text" name="userId" placeholder="remember one??" maxlength="10" required>
+                </fieldset>
+                <div>
+                    <fieldset class="field_set" id="container_password_login">
+                        <legend class="label">Password <b class="mandatoryField">*</b></legend>
+                        <input class="entry" id="password_verify" type="password" name="password" placeholder="*****" required>
+                    </fieldset>
+                    <div id="login_btn_pos"><button id="login_user" class="submit">Login</button></div>
+                </div>
+            </form>
+        </div>
+        <div id="forgot_btn_pos"><button id="forgot_btn">Forgot Pass??</button></div>
+    </div>
+    <div id="forgot-password-section" class="animate">
+        <h1 class="heading">FORGOT PASSWORD!!!</h1>
+        <div id="forgot_password">
+            <form id="forgot-pass-form">
+                <fieldset class="field_set" id="container_userId_forgot">
+                    <legend class="label">User ID <b class="mandatoryField">*</b></legend>
+                    <input class="entry" id="userID_forgot" type="text" name="userId" placeholder="Type UserID" maxlength="10" required>
+                </fieldset>
+                <div id="get_otp_pos"><button id="get_otp">Get OTP</button></div>
+                <div>
+                    <fieldset class="field_set">
+                        <legend class="label">OTP <b class="mandatoryField">*</b></legend>
+                        <input class="entry" id="otp_verify" type="text" name="otp" placeholder="Check your e-mail..." maxlength="6" required>
+                    </fieldset>
+                    <fieldset class="field_set" id="container_password_forgot">
+                        <legend class="label">New Password <b class="mandatoryField">*</b></legend>
+                        <input class="entry" id="new_password" type="password" name="password" placeholder="*****" maxlength="20" required>
+                    </fieldset>
+                    <div id="reset_btn_pos"><button id="reset_btn">RESET</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="register-section" class="animate">
+        <h1 class="heading">REGISTER!!!</h1>
+        <div id="register">
+            <form id="register-form">
+                <fieldset class="field_set" id="container_registerId">
+                    <legend class="label">Name <b class="mandatoryField">*</b></legend>
+                    <input class="entry" type="text" name="name" placeholder="better type full??" maxlength="20" required>
+                </fieldset>
+                <br />
+                <fieldset class="field_set">
+                    <legend class="label">User Id <b class="mandatoryField">*</b></legend>
+                    <input class="entry" type="text" name="userId" placeholder="out of world??" maxlength="10" required>
+                </fieldset>
+                <br />
+                <fieldset class="field_set">
+                    <legend class="label">Email Id <b class="mandatoryField">*</b></legend>
+                    <input class="entry" type="text" name="email" placeholder="got any??" minlength="6" maxlength="30" required>
+                </fieldset>
+                <br />
+                <fieldset class="field_set">
+                    <legend class="label">Password <b class="mandatoryField">*</b></legend>
+                    <input class="entry" type="password" name="password" placeholder="*****" minlength="6" maxlength="20" required>
+                </fieldset>
+                <br />
+                <div>
+                    <fieldset class="field_set">
+                        <legend class="label">Bio</legend>
+                        <textarea class="entry" id="bio_register" name="bio" placeholder="write something CACHY??" maxlength="75"></textarea>
+                    </fieldset>
+                    <button id="register_user" class="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="user-data">
+        <button id="logout_user">LogOut</button>
+        <button id="user_greet"></button>
+        <button id="update_details_btn">Update Details</button>
+        <button id="delete_user_btn">Delete Account</button>
+    </div>
+    <img src="./images/back.png" id="back_btn" />
+    <div id="user_section">
+        <div id="user_details">
+            <img id="user_avatar" src="./images/avatar/avatar.png">
+            <div id="user_text_details"></div>
+        </div>
+        <div id="userPost_btn"><button class="make_a_post" id="make_a_post_userScreen">Post A Meme</button></div>
+        <div class="heading animate" id="user_posts_heading">Posts</div>
+        <section class="cards animate" id="user_posts"></section>
+    </div>
+    <div id="posts_section">
+        <br /><br />
+        <div id="postMeme_btn"><button class="make_a_post" id="make_a_post_homeScreen">Post A Meme</button></div>
+        <div class="heading animate" id="most_adored_btn">Adored Feeds</div>
+        <div class="heading animate" id="latest_posts_btn">Latest Feeds</div>
+        <section class="cards animate" id="latest_adored_posts"></section>
+    </div>
+    <div id="update-user-details-section" class="animate">
+        <h1 class="heading">UPDATE DETAILS??</h1>
+        <div id="update-user">
+            <form id="update-user-form">
+                <fieldset class="field_set" id="container_updateId">
+                    <legend class="label">Name</legend>
+                    <input class="entry" type="text" name="name" placeholder="new_name" maxlength="20">
+                </fieldset>
+                <br />
+                <fieldset class="field_set">
+                    <legend class="label">Email Id</legend>
+                    <input class="entry" type="text" name="email" placeholder="new_mail" minlength="6" maxlength="30">
+                </fieldset>
+                <br />
+                <fieldset class="field_set">
+                    <legend class="label">Password</legend>
+                    <input class="entry" type="password" name="password" placeholder="*****" minlength="6" maxlength="20">
+                </fieldset>
+                <br />
+                <div>
+                    <fieldset class="field_set">
+                        <legend class="label">Bio</legend>
+                        <textarea class="entry" id="bio_update" name="bio" placeholder="new_bio" maxlength="75"></textarea>
+                    </fieldset>
+                    <div id="update_user_btn_pos">
+                        <button id="confirm_details" class="submit">UPDATE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="postMeme" class="animate">
+        <h1 class="heading">LIKED THE MEMES?<br>CONTRIBUTE!</h1>
+        <div id="post_meme">
+            <form id="upload-post-form">
+                <fieldset id="caption_post" class="field_set">
+                    <legend class="label">Caption <b class="mandatoryField">*</b></legend>
+                    <textarea id="postMeme_caption" class="entry" name="caption" placeholder="Show your CREATIVITY....(•ω•)" maxlength="75" required></textarea>
+                </fieldset>
+                <br />
+                <div>
+                    <fieldset class="field_set">
+                        <legend class="label">Meme URL / Upload <b class="mandatoryField">*</b></legend>
+                        <input class="entry" id="meme_upload_url" type="text" name="url" placeholder="URL or Upload MEME" required>
+                        <br>
+                        <input type="file" autocomplete="false" id="image_upload" name="image" accept="image/*">
+                    </fieldset>
+                    <button id="submit_postForm" class="submit">Post Meme</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="editPost" class="animate">
+        <h1 class="heading">EDIT POST!!!</h1>
+        <div id="edit_post">
+            <form id="edit-post-form">
+                <button id="post_id"></button>
+                <fieldset id="caption_edit" class="field_set">
+                    <legend class="label">Caption</legend>
+                    <textarea id="editPost_caption" class="entry" name="caption" placeholder="something CREATIVE....(•ω•)" maxlength="75"></textarea>
+                </fieldset>
+                <br />
+                <div>
+                    <fieldset class="field_set">
+                        <legend class="label">Meme URL / Upload</legend>
+                        <input class="entry" autocomplete="false" id="meme_update_url" type="text" name="url" placeholder="URL or Upload MEME">
+                        <br>
+                        <input type="file" autocomplete="false" id="image_update" name="image" accept="image/*">
+                    </fieldset>
+                    <button class="submit" id="submit_editForm">Edit Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="show_pop_img" class="pop_img_modal">
+        <div class="pop_img_modal-cont">
+            <span id="pop_img_close">&times;</span>
+                <div id="pop_img_place">
+                    <img id="pop_img" />
+                </div>
+        </div>
+    </div>
+    <div id="show_msg" class="pop_msg_modal">
+        <div class="pop_msg_modal-cont">
+            <div class="msg_cont">
+                <span id="pop_msg_close">&times;</span>
+                <h3 id="pop_msg"></h3>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
