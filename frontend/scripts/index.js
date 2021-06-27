@@ -74,7 +74,7 @@ async function handleLogin(event) {
     let login_data = Object.fromEntries(raw_data.entries());
     try {
         wait();
-        const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/login/', {
+        const res = await fetch('http://localhost:8081/api/v1.0/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ async function getOtp() {
         let forgot_pass_data = Object.fromEntries(raw_data.entries());
         try {
             wait();
-            const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/forgotPassword', {
+            const res = await fetch('http://localhost:8081/api/v1.0/forgotPassword', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -179,7 +179,7 @@ async function resetPass() {
     let reset_pass_data = Object.fromEntries(raw_data.entries());
     try {
         wait();
-        const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/resetPassword', {
+        const res = await fetch('http://localhost:8081/api/v1.0/resetPassword', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -235,7 +235,7 @@ async function handleRegister(event) {
     else {
         try {
             wait();
-            const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/register/', {
+            const res = await fetch('http://localhost:8081/api/v1.0/register/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -388,7 +388,7 @@ function addPostsToHTML(post, addLoc){
 
 async function loadLatestPosts(addLoc) {
     try {
-        const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/latestPosts';
+        const url = 'http://localhost:8081/api/v1.0/posts/latestPosts';
         const res = await fetch(url, {
             method: 'GET',
             headers: {
@@ -423,7 +423,7 @@ async function loadLatestPosts(addLoc) {
 
 async function loadAdoredPosts(addLoc) {
     try {
-        const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/mostAdored';
+        const url = 'http://localhost:8081/api/v1.0/posts/mostAdored';
         const res = await fetch(url, {
             method: 'GET',
             headers: {
@@ -485,7 +485,7 @@ async function like_post(post_id, like_image, likes) {
     let like_data = Object.fromEntries(raw_data.entries());
     try {
         wait();
-        const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/like/' + post_id;
+        const url = 'http://localhost:8081/api/v1.0/posts/like/' + post_id;
         const res = await fetch(url, {
             method: 'PATCH',
             headers: {
@@ -524,7 +524,7 @@ async function unlike_post(post_id, like_image, likes) {
     let like_data = Object.fromEntries(raw_data.entries());
     try {
         wait();
-        const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/unlike/' + post_id;
+        const url = 'http://localhost:8081/api/v1.0/posts/unlike/' + post_id;
         const res = await fetch(url, {
             method: 'PATCH',
             headers: {
@@ -573,7 +573,7 @@ async function deletePost() {
     if(confirm("Are you sure you want to delete this post????")) {
         try {
             wait();
-            const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/' + this.value;
+            const url = 'http://localhost:8081/api/v1.0/posts/' + this.value;
             const res = await fetch(url, {
                 method: 'DELETE',
                 headers: {
@@ -650,7 +650,7 @@ async function loadUserDetails(user_id) {
     const addLoc = document.getElementById("user_text_details");
     addLoc.innerHTML = "";
     try {
-        const url = 'https://trash-hub.herokuapp.com/api/v1.0/users/' + user_id;
+        const url = 'http://localhost:8081/api/v1.0/users/' + user_id;
         const res = await fetch(url, {
             method: 'GET',
             headers: {
@@ -703,7 +703,7 @@ async function loadUserDetails(user_id) {
 async function loadUserPosts(user_id) {
     userPosts.innerHTML = "";
     try {
-        const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/users/' + user_id;
+        const url = 'http://localhost:8081/api/v1.0/posts/users/' + user_id;
         const res = await fetch(url, {
             method: 'GET',
             headers: {
@@ -789,7 +789,7 @@ async function handleDetailsUpdate(event) {
     else {
         try {
             wait();
-            const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/users/' + session_id, {
+            const res = await fetch('http://localhost:8081/api/v1.0/users/' + session_id, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -830,7 +830,7 @@ async function deleteUser() {
     if(confirm("Are you sure you want to delete your profile????")) {
         try {
             wait();
-            let url = "https://trash-hub.herokuapp.com/api/v1.0/users/" + session_id;
+            let url = "http://localhost:8081/api/v1.0/users/" + session_id;
             const res = await fetch(url, {
                     method: 'DELETE',
                     headers: {
@@ -909,10 +909,11 @@ async function addImgUrl(loc_to_load, fileList) {
     let formData = new FormData();
     formData.append("image", fileList[0]);
     try {
+        // add your own IMGUR API
         const res = await fetch("https://api.imgur.com/3/image",{
             method: "POST",
             headers: {
-                "Authorization": "Client-ID 8d71c644e385869"
+                "Authorization": "<your_own_auth_key"
             },
             body: formData,
             redirect: "follow"
@@ -959,7 +960,7 @@ async function handlePost(event) {
 
         try {
             wait();
-            const res = await fetch('https://trash-hub.herokuapp.com/api/v1.0/posts/', {
+            const res = await fetch('http://localhost:8081/api/v1.0/posts/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1044,7 +1045,7 @@ async function handleEditPost(event) {
     else {
         try {
             wait();
-            const url = 'https://trash-hub.herokuapp.com/api/v1.0/posts/' + post_id;
+            const url = 'http://localhost:8081/api/v1.0/posts/' + post_id;
             const res = await fetch(url, {
                 method: 'PATCH',
                 headers: {
