@@ -4,7 +4,6 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-
 // Adding cors
 app.use(cors());
 
@@ -25,14 +24,14 @@ app.use("/api/v1.0/posts", postsRoute);
 
 // CONNECT TO DB
 mongoose.connect(
-    process.env.DB_CONNECT, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true
-    },
-    () => console.log("Connected to DB!")
+	process.env.DB_CONNECT,
+	{
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true,
+	},
+	() => console.log("Connected to DB!")
 );
-
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`\nServer running on port ${PORT}`));
