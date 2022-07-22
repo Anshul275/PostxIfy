@@ -1,2 +1,2 @@
-# TrashHUB
-https://trash-hub.netlify.app/
+# PostxIfy
+https://postxify.netlify.app/
